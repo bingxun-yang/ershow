@@ -14,19 +14,14 @@
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
- 	<context:property-placeholder location="file:${global.config.path}config.properties" /> 
+    <context:property-placeholder location="classpath:config.properties" />
 
-    <!--    <context:property-placeholder location="classpath:config.properties" />-->
-    <!-- 自动扫描bean，把作了注解的类转换为bean -->
-    <context:component-scan base-package="com.ershow" />
+    <context:component-scan base-package="com.ershow.service" />
 
     <context:annotation-config />
 
-    <task:scheduler id="defaultTaskScheduler" pool-size="20" />
-    
-    <!-- rejection-policy="CALLER_RUNS" 有可能阻塞主线程 -->
-    <task:executor id="defaultTaskExecutor" pool-size="4-256" queue-capacity="128" />
-
     <aop:aspectj-autoproxy />
+
+    <import resource="classpath:spring-mybatis.xml" />
 
 </beans>

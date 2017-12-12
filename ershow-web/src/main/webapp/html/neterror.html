@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>网络异常</title>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="email=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+		<script src="../static/js/jquery-1.11.3.min.js"></script>
+		<script src="../static/js/jquery.loadTemplate-1.4.4.min.js"></script>
+		<script type="text/html" id="result_card">
+			<div class="result-card">
+				<div class="card-icon">
+					<img data-src="img">
+				</div>
+				<div class="result-card-tips" data-content="tips"></div>
+				<div class="result-card-subtips" data-content="subtips"></div>
+			</div>
+		</script>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html{
+				background: #F5F5F9;
+			}
+			.result-card {
+				width: 100%;
+				background: #FFF;
+				position: relative;
+				padding-top: 50px;
+				margin-bottom: 15px;
+			}
+			
+			.result-card-tips {
+				padding-top: 0;
+				padding-left: 15px;
+				color: #55c10e;
+			}
+			
+			.result-card::after {
+				content: "";
+				left: 0;
+			}
+			
+			.result-card .card-icon {
+				margin: 0 auto;
+				width: 90px;
+				height: 90px;
+			}
+			
+			.result-card .card-icon img {
+				width: 100%;
+			}
+			
+			.result-card .result-card-tips {
+				width: 100%;
+				padding-top: 28px;
+				text-align: center;
+				font-size: 21px;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				color: #000;
+			}
+			
+			.result-card .result-card-subtips {
+				width: 100%;
+				padding: 14px 0 23px;
+				text-align: center;
+				font-size: 14px;
+				color: #888;
+				line-height: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+	</body>
+	<script>
+		var cardTxt = {
+			tips: "网络异常",
+			subtips: "网络出现异常,请稍后重试",
+			img: '../static/images/result_fail.png'
+				//img: '${host.img}/images/result_fail.png?${host.version}'
+		}
+		$("body").loadTemplate($("#result_card"), cardTxt);
+	</script>
+
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+	<contextName>ershow</contextName>
+
+
+
+	<!-- 时间滚动输出 level为 ERROR 日志 -->
+	<appender name="errorfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>./logs/ershow/ershow-jar-error.log</File>
+
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY </onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>./logs/ershow/ershow-jar-error-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>512MB</maxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 -->
+	<appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>./logs/ershow/ershow-jar.log</File>
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./logs/ershow/ershow-jar-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>512MB</maxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="com.ibatis" level="DEBUG" />
+	<logger name="org.springframework" level="DEBUG" />
+	<logger name="java.sql.PreparedStatement" level="DEBUG" />
+	<logger name="org.springframework.web.servlet.DispatcherServlet" level="DEBUG" />
+	<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" />
+	<logger name="java.sql" level="DEBUG" />
+	<logger name="org.apache.commons" level="DEBUG" />
+	<logger name="java.sql.Statement" level="DEBUG" />
+	<logger name="org.springframework.web.context.support.XmlWebApplicationContext" level="DEBUG" />
+	<logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG" />
+	<logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="DEBUG" />
+	<logger name="java.sql.ResultSet" level="DEBUG" />
+	<logger name="java.sql.Connection" level="DEBUG" />
+	<logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG" />
+	<logger name="org.springframework.amqp.rabbit.listener.BlockingQueueConsumer" level="WARN" />  
+    <logger name="org.springframework.core.task.SimpleAsyncTaskExecutor" level="WARN" /> 
+    <logger name="com.alibaba.dubbo.remoting.exchange.support.header.HeartBeatTask" level="WARN"/>
+    <logger name="com.alibaba.dubbo.remoting.exchange.support.header.HeartbeatHandler" level="WARN"/>
+    <logger name="org.apache.zookeeper.ClientCnxn" level="WARN"/>   
+    <logger name="org.dozer.fieldmap.FieldMap" level="WARN"/>     
+
+	<root level="DEBUG">
+		<appender-ref ref="logfile" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="errorfile" />
+		<appender-ref ref="performanceMonitorFile" />
+	</root>
+</configuration>
