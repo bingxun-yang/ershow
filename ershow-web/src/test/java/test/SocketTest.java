@@ -29,7 +29,17 @@ public class SocketTest {
 
 
 
-        Map<String,String> map = new HashMap<String, String>();
+//        Map<String,String> map = new HashMap<String, String>();
+//
+//
+//        map.put("a","a");
+
+
+        String key = "a";
+        int h;
+        h = key.hashCode();
+        System.out.println(h >>> 16);
+        //System.out.println((key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16));
 
 
 
